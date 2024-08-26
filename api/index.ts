@@ -1,12 +1,16 @@
 import express from "express";
+import bodyParser from 'body-parser';
 
 const app = express();
 
-app.get("/", (req, res) => res.send("Express on Vercel"));
+// Parse req body
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.get("/", (req, res) => res.send("Testing CallRail's Webhook: Express on Vercel App"));
 
 app.post("/post-interactions", (req, res) => {
     console.log(req.body);
-    console.log(JSON.stringify(JSON.parse(req.body)));
     res.status(200).send("Post form succesfully");
 })
 
